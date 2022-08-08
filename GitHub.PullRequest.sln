@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHub.PullRequest.Console", "src\GitHub.PullRequest.Console\GitHub.PullRequest.Console.csproj", "{AC6C22B4-DF75-48EF-862E-E2485D7B3E39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHub.PullRequest.ConsoleApp", "src\GitHub.PullRequest.ConsoleApp\GitHub.PullRequest.ConsoleApp.csproj", "{AC6C22B4-DF75-48EF-862E-E2485D7B3E39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

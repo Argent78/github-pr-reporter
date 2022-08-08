@@ -8,4 +8,5 @@ var hostBuilder = Host.CreateDefaultBuilder()
     });
 
 var app = ConsoleApp.CreateFromHostBuilder(hostBuilder, args);
+app.AddAllCommandType();
 await app.RunAsync();
