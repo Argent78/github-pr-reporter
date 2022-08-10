@@ -6,11 +6,9 @@ namespace GitHub.PullRequest.ConsoleApp.Commands;
 [Command("pr", "Extract data for pull requests")]
 internal class PullRequestLifetime : ConsoleCommand
 {
-    private readonly GitHubClient gitHubClient;
-
-    public PullRequestLifetime(GitHubClient gitHubClient)
+    public PullRequestLifetime(GitHubClient gitHubClient) : base(gitHubClient)
     {
-        this.gitHubClient = gitHubClient;
+
     }
 
     [Command("lifetime", "Extract pull request lifetime data")]
@@ -19,16 +17,8 @@ internal class PullRequestLifetime : ConsoleCommand
         [Option("r", "Name of repository.")] string repo)
     {
         // Get all the closed PRs for the repo
-        // https://api.github.com/repos/racwa/github-repo-management/pulls?state=closed
-        var request = new PullRequestRequest
-        {
-            State = ItemStateFilter.Closed
-        };
+        var pullRequests = await GetPullRequestsAsync(owner, repo);
 
-
-        var pullRequests = await gitHubClient.PullRequest.GetAllForRepository(owner, repo, request);
-        Console.WriteLine($"\nFetched {pullRequests.Count} closed pull requests for repo '{owner}/{repo}'\n");
-        
         var prLifetimes = new List<Lifetime>();
 
         foreach (var pullRequest in pullRequests)
@@ -50,5 +40,4 @@ internal class PullRequestLifetime : ConsoleCommand
         
         WriteToCsv(owner, repo, prLifetimes);
     }
-
 }

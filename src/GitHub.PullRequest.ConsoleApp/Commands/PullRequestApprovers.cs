@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using CsvHelper;
-using GitHub.PullRequest.ConsoleApp.Models;
+﻿using GitHub.PullRequest.ConsoleApp.Models;
 using Octokit;
 // ReSharper disable UnusedMember.Global
 
@@ -9,12 +7,11 @@ namespace GitHub.PullRequest.ConsoleApp.Commands;
 [Command("pr", "Extract data for pull requests")]
 internal class PullRequestApprovers : ConsoleCommand
 {
-    private readonly GitHubClient gitHubClient;
-
-    public PullRequestApprovers(GitHubClient gitHubClient)
+    public PullRequestApprovers(GitHubClient gitHubClient) : base(gitHubClient)
     {
-        this.gitHubClient = gitHubClient;
+
     }
+
 
     [Command("approvers", "List pull request approvers")]
     public async Task ListApproversAsync(
@@ -22,14 +19,7 @@ internal class PullRequestApprovers : ConsoleCommand
         [Option("r", "Name of repository.")] string repo)
     {
         // Get all the closed PRs for the repo
-        // https://api.github.com/repos/racwa/github-repo-management/pulls?state=closed
-        var request = new PullRequestRequest
-        {
-            State = ItemStateFilter.Closed
-        };
-
-        var pullRequests = await gitHubClient.PullRequest.GetAllForRepository(owner, repo, request);
-        Console.WriteLine($"\nFetched {pullRequests.Count} closed pull requests for repo '{owner}/{repo}'\n");
+        var pullRequests = await GetPullRequestsAsync(owner, repo);
         
         // Collect the Id for each pull request
         var prIds = pullRequests
@@ -60,14 +50,4 @@ internal class PullRequestApprovers : ConsoleCommand
 
         WriteToCsv(owner, repo, approvals);
     }
-
-    // private static void WriteToCsv(string owner, string repo, IEnumerable<Approval> approvals)
-    // {
-    //     var filename = $"{owner}-{repo}-admin-approvals.csv";
-    //     Console.WriteLine($"Writing data to file '{filename}'");
-    //     using var writer = new StreamWriter(filename);
-    //     using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-    //     csv.WriteRecords(approvals);
-    // }
-    
 }
