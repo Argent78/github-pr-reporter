@@ -7,7 +7,7 @@ using Octokit;
 namespace GitHub.PullRequest.ConsoleApp.Commands;
 
 [Command("pr", "Extract data for pull requests")]
-internal class PullRequestApprovers : ConsoleAppBase
+internal class PullRequestApprovers : ConsoleCommand
 {
     private readonly GitHubClient gitHubClient;
 
@@ -61,13 +61,13 @@ internal class PullRequestApprovers : ConsoleAppBase
         WriteToCsv(owner, repo, approvals);
     }
 
-    private static void WriteToCsv(string owner, string repo, IEnumerable<Approval> approvals)
-    {
-        var filename = $"{owner}-{repo}-admin-approvals.csv";
-        Console.WriteLine($"Writing data to file '{filename}'");
-        using var writer = new StreamWriter(filename);
-        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-        csv.WriteRecords(approvals);
-    }
+    // private static void WriteToCsv(string owner, string repo, IEnumerable<Approval> approvals)
+    // {
+    //     var filename = $"{owner}-{repo}-admin-approvals.csv";
+    //     Console.WriteLine($"Writing data to file '{filename}'");
+    //     using var writer = new StreamWriter(filename);
+    //     using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+    //     csv.WriteRecords(approvals);
+    // }
     
 }

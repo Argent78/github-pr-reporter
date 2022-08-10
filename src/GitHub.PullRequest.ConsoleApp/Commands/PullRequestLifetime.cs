@@ -1,12 +1,10 @@
-﻿using System.Globalization;
-using CsvHelper;
-using GitHub.PullRequest.ConsoleApp.Models;
+﻿using GitHub.PullRequest.ConsoleApp.Models;
 using Octokit;
 
 namespace GitHub.PullRequest.ConsoleApp.Commands;
 
 [Command("pr", "Extract data for pull requests")]
-internal class PullRequestLifetime : ConsoleAppBase
+internal class PullRequestLifetime : ConsoleCommand
 {
     private readonly GitHubClient gitHubClient;
 
@@ -53,13 +51,4 @@ internal class PullRequestLifetime : ConsoleAppBase
         WriteToCsv(owner, repo, prLifetimes);
     }
 
-    //TODO: Base class with common methods for CSV writing
-    private static void WriteToCsv(string owner, string repo, IEnumerable<Lifetime> lifetime)
-    {
-        var filename = $"{owner}-{repo}-pr-lifetime.csv";
-        Console.WriteLine($"Writing data to file '{filename}'");
-        using var writer = new StreamWriter(filename);
-        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-        csv.WriteRecords(lifetime);
-    }
 }
