@@ -2,7 +2,7 @@
   "profiles": {
     "GitHub.PullRequest.Console": {
       "commandName": "Project",
-      "commandLineArgs": "pr approvers -o racwa -r github-repo-management"
+      "commandLineArgs": "pr lifetime -o racwa -r github-repo-management"
     }
   }
 }

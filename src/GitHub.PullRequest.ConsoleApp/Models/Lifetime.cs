@@ -1,7 +1,7 @@
 ﻿namespace GitHub.PullRequest.ConsoleApp.Models;
 
-internal class Approval
+internal class Lifetime
 {
     public int PullRequestNumber { get; set; }
-    public string? Username { get; set; }
+    public double TotalHours { get; set; }
 }
