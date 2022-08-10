@@ -1,5 +1,6 @@
 ﻿using GitHub.PullRequest.ConsoleApp.Models;
 using Octokit;
+
 // ReSharper disable UnusedMember.Global
 
 namespace GitHub.PullRequest.ConsoleApp.Commands;
@@ -26,20 +27,20 @@ internal class PullRequestApprovers : ConsoleCommand
             .Select(pullRequest => pullRequest.Number)
             .ToList();
 
-        var approvals = new List<Approval>();
+        var approvals = new List<Contribution>();
 
         // for each Id in our collection of closed PRs
         foreach (var prId in prIds)
         {
             // get all the Approved reviews
-            var prReviews = await gitHubClient.PullRequest.Review.GetAll(owner, repo, prId);
+            var prReviews = await GitHubClient.PullRequest.Review.GetAll(owner, repo, prId);
             foreach (var pullRequestReview in prReviews)
             {
                 if (pullRequestReview.User.Type == AccountType.User &&
                     pullRequestReview.State == PullRequestReviewState.Approved)
                 {
                     // Log the name of reviewer
-                    approvals.Add(new Approval
+                    approvals.Add(new Contribution
                     {
                         PullRequestNumber = prId,
                         Username = pullRequestReview.User.Login

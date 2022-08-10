@@ -7,11 +7,11 @@ namespace GitHub.PullRequest.ConsoleApp.Commands;
 
 internal abstract class ConsoleCommand : ConsoleAppBase
 {
-    protected readonly GitHubClient gitHubClient;
+    protected readonly GitHubClient GitHubClient;
 
     protected ConsoleCommand(GitHubClient gitHubClient)
     {
-        this.gitHubClient = gitHubClient;
+        this.GitHubClient = gitHubClient;
     }
 
 
@@ -34,7 +34,7 @@ internal abstract class ConsoleCommand : ConsoleAppBase
             State = ItemStateFilter.Closed
         };
         
-        var pullRequests = await gitHubClient.PullRequest.GetAllForRepository(owner, repo, request);
+        var pullRequests = await GitHubClient.PullRequest.GetAllForRepository(owner, repo, request);
         Console.WriteLine($"\nFetched {pullRequests.Count} pull requests for repo '{owner}/{repo}'\n");
         return pullRequests;
     }
