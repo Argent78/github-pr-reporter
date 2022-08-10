@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>ce7ab5bd-847b-4b11-a2a8-a9d531b42599</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConsoleAppFramework" Version="4.2.2" />
+    <PackageReference Include="CsvHelper" Version="28.0.1" />
+    <PackageReference Include="Octokit" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

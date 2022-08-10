@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GitHub.PullRequest.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "pr lifetime -o racwa -r github-repo-management"
+    }
+  }
+}
